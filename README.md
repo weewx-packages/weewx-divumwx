@@ -1,15 +1,27 @@
-# Welcome to the DivumWX skin for WeeWX Version 1.7.0
+# DivumWX for WeeWX
+
+DivumWX combines a browser weather dashboard, live LOOP JSON, archive charts,
+Skyfield astronomy, configurable weather API data and optional webcam timelapse.
+The installer configures the `DivumWXReport` skin and supporting services.
+This repository continues [Millardiang/weewx-divumwx](https://github.com/Millardiang/weewx-divumwx).
+
+The maintained catalog release is the unchanged upstream `ver1.7.0` source
+at `ac720ea8b52158fe099327264f02368c0a3044d0`, with its original assets and
+license files. Install the fixed `1.7.0` archive in the
+[installation guide](INSTALLATION_GUIDE.md). The older catalog `1.7.0.post1`
+distribution is superseded; its asset selection differs from the original.
+
 Copyright :copyright: 2026 Ian Millard and Sean Balfour, [GNU GENERAL PUBLIC LICENSE Version 3](https://github.com/Millardiang/weewx-divumwx/blob/main/license.txt)
- 
+
 # Features
-* Compatible with WeeWX version 5.5.0 onwards and Python version 3.13.5 onwards. (Not tested with earlier versions).
+* The catalog release requires WeeWX 5.5–5.x and Python 3.13.5 or newer.
 * Tested with Pip and Deb installs.
 * Fully prompted install process allowing user custom settings.
 * Live gauges in the CarbonSteel Series style, with 24-hour sparklines and a year-at-a-glance calendar
 * Live (realtime) loop json data.
 * Live (realtime) almanac json data from Skyfield.
 * Astronomy section including Sean Balfour's visualisations, and an Equal Earth map that wraps onto a rotating globe, with live day and night, twilight bands, the Sun and Moon with their ground tracks and the station marked.
-* Live Celestial and Skyfield pages drawn with D3: a live sky dome, the Geocentric dial, satellite passes (ISS, Tiangong, Terra and NOAA-21 by default) and comets, rise and set ribbons, the Sun's path, the solar year, the equation of time, the analemma, the lunar month, an orrery and an almanac table — all computed on the station by Skyfield, with no weewx-skyfield, weewx-celestial or weewx-loopdata needed.
+* Astronomy visualizations in the frontend include a live sky dome, the Geocentric dial, satellite passes (ISS, Tiangong, Terra and NOAA-21 by default) and comets, rise and set ribbons, the Sun's path, the solar year, the equation of time, the analemma, the lunar month, an orrery and an almanac table — all computed on the station by Skyfield, with no weewx-skyfield, weewx-celestial or weewx-loopdata needed.
 * Direct data injection of external weather data into WeeWX database (a kind of souped-up weewx-FilePile).
 * Unlike previous beta versions PHP code has been removed. HTML/JS Libraries/CSS only.
 * Ability to reorder dashboard cards locally in browser by drag and drop.
@@ -74,7 +86,8 @@ Copyright :copyright: 2026 Ian Millard and Sean Balfour, [GNU GENERAL PUBLIC LIC
 * Welsh
 
 # Repository
-* https://github.com/Millardiang/weewx-divumwx
+* https://github.com/weewx-packages/weewx-divumwx
+* [Original project](https://github.com/Millardiang/weewx-divumwx)
 
 # Live Website
 * https://steepleclaydonweather.uk
@@ -106,3 +119,22 @@ Copyright :copyright: 2026 Ian Millard and Sean Balfour, [GNU GENERAL PUBLIC LIC
 * Meteocons for animated weather icons.
 * D3.js for data visualisations.
 * Brian Underdown for the original design concept of Weather34 from which weewx-Weather34 and weewx-DivumWX have evolved. None of the original Weather34 code remains however.
+
+## Install and operate
+
+Follow [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md) for dependency setup,
+interactive prompts and the fixed original archive. The required Python packages
+are `requests` and `skyfield` in WeeWX's environment. The installer adds
+`user.divumwx` services for live data, weather APIs, astronomy, derived values,
+archive extras and timelapse, plus the `DivumWXReport` report.
+
+Review the generated configuration, especially station coordinates and output
+paths. It places the frontend in a `divumwx` subdirectory of the station's
+configured web output. After restarting WeeWX, open that directory's web URL.
+To regenerate archive JSON, run `weectl report run DivumWXReport`.
+
+External APIs, ephemerides and webcam/timelapse functions have their own network,
+file and optional executable requirements. Enable only features you configured.
+The separate `DivumWXSkyfield` and `DivumWXCelestial` report installers are
+currently disabled; their source templates alone do not activate those reports.
+See [troubleshooting](TROUBLESHOOTING.md) for configuration and log checks.

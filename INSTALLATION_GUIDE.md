@@ -1,22 +1,19 @@
 # DivumWX Installation Guide
 
-This guide covers DivumWX **1.7.0**. It assumes you already have a stable
-WeeWX 5 installation running with your own hardware driver.
+This guide covers the unchanged original `ver1.7.0` release from
+[Millardiang/weewx-divumwx](https://github.com/Millardiang/weewx-divumwx).
+The fixed catalog archive is `divumwx-1.7.0.zip`, with installer version 1.7.0.
+It retains the original assets and license files. The older `.post1` catalog
+distribution is superseded and is not the original-asset release.
 
-Tested on Debian 13 (Trixie) with:
+Catalog requirements are WeeWX 5.5–5.x and Python 3.13.5 or newer. Use an
+existing station with a working hardware driver. Back up `weewx.conf`,
+the archive database and web directory before installing or upgrading.
 
-* WeeWX 5.5.1 installed from the official WeeWX APT repository (Debian package)
-* WeeWX 5.4.0 installed with pip into a virtual environment
-
-**Always back up your database and `weewx.conf` before installing or upgrading.**
-It is not a nice-to-have; it is a necessity whenever you change your WeeWX installation.
-
-> **Install the tagged release, not `main`.** The download links below point at
-> a fixed release tag. The `main` branch moves as development continues, so
-> installing `main.zip` can give you code newer than, and different from, the
-> release described here. For the newest release, check the
-> [Releases page](https://github.com/Millardiang/weewx-divumwx/releases) and
-> substitute its tag in the URLs below.
+The commands use stock WeeWX's archive installer. Add
+`--config /path/to/weewx.conf` when needed. They neither require nor install
+an extension catalog command in WeeWX core. Restart the service yourself after
+reviewing the generated configuration.
 
 ## Before you start
 
@@ -50,18 +47,18 @@ sudo apt install python3-skyfield python3-requests
 ### Install or upgrade
 
 ```
-sudo weectl extension install https://github.com/Millardiang/weewx-divumwx/archive/refs/tags/ver.1.7.0.zip
+sudo weectl extension install https://github.com/weewx-packages/catalog/releases/download/divumwx/v1.7.0/divumwx-1.7.0.zip
 sudo systemctl restart weewx
 sudo weectl report run DivumWXReport
 ```
 
-The installer creates `/var/www/html/divumwx` and sets its ownership to the
+The installer creates a `divumwx` subdirectory under the configured web output and sets its ownership to the
 account WeeWX runs as (normally `weewx`). No manual `chown` is needed.
 
 ### Check the installation
 
 ```
-weectl extension list          # should show divumwx 1.0.1
+weectl extension list          # original archive reports divumwx 1.7.0
 sudo journalctl -u weewx -n 100 --no-pager | grep -i divumwx
 ```
 
@@ -69,7 +66,7 @@ sudo journalctl -u weewx -n 100 --no-pager | grep -i divumwx
 
 ```
 cd /etc/weewx
-sudo python3 divumwx_uninstall_helper.py
+sudo python3 /etc/weewx/bin/user/divumwx_uninstall_helper.py
 sudo weectl extension uninstall divumwx
 sudo systemctl restart weewx
 ```
@@ -96,7 +93,7 @@ sudo mkdir -p /var/www/html/divumwx
 sudo chown -R $(whoami):$(whoami) /var/www/html/divumwx
 
 source ~/weewx-venv/bin/activate
-weectl extension install https://github.com/Millardiang/weewx-divumwx/archive/refs/tags/ver.1.7.0.zip
+weectl extension install https://github.com/weewx-packages/catalog/releases/download/divumwx/v1.7.0/divumwx-1.7.0.zip
 sudo systemctl restart weewx
 weectl report run DivumWXReport
 ```
@@ -106,7 +103,7 @@ weectl report run DivumWXReport
 ```
 source ~/weewx-venv/bin/activate
 cd ~/weewx-data
-python3 divumwx_uninstall_helper.py
+python3 ~/weewx-data/bin/user/divumwx_uninstall_helper.py
 weectl extension uninstall divumwx
 sudo systemctl restart weewx
 ```
@@ -116,7 +113,7 @@ sudo systemctl restart weewx
 ## Upgrading from a beta or 1.0.0
 
 1. Back up `weewx.conf`, your WeeWX database, and the `divumwx` web directory.
-2. Run the install command for your layout (A or B above) with the new tag.
+2. Run the install command for your layout (A or B above) with the selected fixed archive URL.
 3. Press Enter at each prompt to keep your existing settings, or type a new
    value to change it. Changed values are applied.
 4. The installer removes frontend files that an earlier DivumWX release

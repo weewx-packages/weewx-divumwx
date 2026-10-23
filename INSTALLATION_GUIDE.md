@@ -75,11 +75,21 @@ sudo systemctl restart weewx
 
 ## B. WeeWX installed with pip (virtual environment)
 
+This section assumes WeeWX already runs from `~/weewx-venv`, with its station
+under `~/weewx-data`. Replace both paths with your existing installation's
+paths before running the commands. Creating a separate environment just for
+these libraries will not make them available to your WeeWX service. After
+activation, use that environment's `python` and `weectl`.
+
 ### Dependencies
+
+Skyfield installs NumPy as a dependency. If your platform lacks a compatible
+NumPy wheel, prepare its [native build prerequisites](https://numpy.org/doc/stable/building/)
+before running pip.
 
 ```
 source ~/weewx-venv/bin/activate
-python3 -m pip install skyfield requests
+python -m pip install 'skyfield' 'requests'
 ```
 
 ### Install or upgrade

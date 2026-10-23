@@ -4,7 +4,7 @@ This guide covers the unchanged original `ver1.7.0` release from
 [Millardiang/weewx-divumwx](https://github.com/Millardiang/weewx-divumwx).
 The fixed catalog archive is `divumwx-1.7.0.zip`, with installer version 1.7.0.
 It retains the original assets and license files. The older `.post1` catalog
-distribution is superseded and is not the original-asset release.
+distribution is withdrawn.
 
 Catalog requirements are WeeWX 5.5–5.x and Python 3.13.5 or newer. Use an
 existing station with a working hardware driver. Back up `weewx.conf`,

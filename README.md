@@ -3,13 +3,13 @@
 DivumWX combines a browser weather dashboard, live LOOP JSON, archive charts,
 Skyfield astronomy, configurable weather API data and optional webcam timelapse.
 The installer configures the `DivumWXReport` skin and supporting services.
-This repository continues [Millardiang/weewx-divumwx](https://github.com/Millardiang/weewx-divumwx).
+This repository mirrors [Millardiang/weewx-divumwx](https://github.com/Millardiang/weewx-divumwx).
 
 The maintained catalog release is the unchanged upstream `ver1.7.0` source
 at `ac720ea8b52158fe099327264f02368c0a3044d0`, with its original assets and
 license files. Install the fixed `1.7.0` archive in the
 [installation guide](INSTALLATION_GUIDE.md). The older catalog `1.7.0.post1`
-distribution is superseded; its asset selection differs from the original.
+distribution is withdrawn; use the original release linked above.
 
 Copyright :copyright: 2026 Ian Millard and Sean Balfour, [GNU GENERAL PUBLIC LICENSE Version 3](https://github.com/Millardiang/weewx-divumwx/blob/main/license.txt)
 
